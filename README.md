@@ -1,8 +1,11 @@
 # odin_rock_paper_scissors
+Please visit my game @ https://ongks-user.github.io/odin_rock_paper_scissors/ <br>
+<br>
+
 Create a game that plays rock, paper or scissor <br>
 with the help of Javascript. <br>
 
-1. Play 5 rounds of the game <br>
-2. User input a choice: rock, paper or scissor <br>
-3. Computer input a choice: rock, paper or scissor <br>
-4. User or Computer win?
+1. Keep playing until player score hit 5 <br>
+2. user select "rock" / "paper" / "scissor" button <br>
+3. Computer will reponse <br>
+4. Once player score hit 5, game over...Who will win??
