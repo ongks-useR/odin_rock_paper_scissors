@@ -1,68 +1,53 @@
-function randomNumber(n = 3) {
+const playerSelection = document.querySelectorAll('button');
 
-    let computerNumber;
+playerSelection.forEach(btn => btn.addEventListener('click', function (e) {
+    const user = e.target.id;
+    let computer = Math.floor(Math.random() * 3);
 
-    computerNumber = Math.floor(Math.random() * n);
-
-    return computerNumber
-}
-
-function computerPlay() {
-
-    let computerDecision;
-    let randomPick;
-
-    randomPick = randomNumber();
-
-    switch (randomPick) {
-        case 0:
-            computerDecision = 'rock';
-            break;
-        case 1:
-            computerDecision = 'paper';
-            break;
-        case 2:
-            computerDecision = 'scissor';
-            break;
+    if (computer === 0) {
+        computer = 'rock';
+    }
+    else if (computer === 1) {
+        computer = 'paper';
+    }
+    else {
+        computer = 'scissor';
     }
 
-    return computerDecision
-}
+    const final = document.querySelector('#result');
+    const playerImg = document.querySelector('#player-img');
+    const computerImg = document.querySelector('#computer-img');
+    const player_score = document.querySelector('.player-score');
+    const computer_score = document.querySelector('.computer-score');
 
-function userPlay() {
+    playerImg.setAttribute('src', `./images/${user}.png`)
+    computerImg.setAttribute('src', `./images/${computer}.png`)
 
-    let userDecision;
+    const userWin = (user === 'rock' && computer === 'scissor') || (user === 'paper' && computer === 'rock') || (user === 'scissor' && computer === 'paper')
 
-    userDecision = prompt('Please choose either ROCK, PAPER or SCISSOR??');
-    userDecision = userDecision.toLowerCase();
+    const userLoss = (user === 'rock' && computer === 'paper') || (user === 'paper' && computer === 'scissor') || (user === 'scissor' && computer === 'rock')
 
-    return userDecision
-}
-
-function playRound(playerSelection = userPlay(), computerSelection = computerPlay()) {
-
-    let player = playerSelection;
-    let computer = computerSelection;
-    let result;
-
-    if (player == 'rock' && computer == 'scissor') {
-        result = 'You Win! Rock beats Scissor'
-    } else if (player == 'rock' && computer == 'paper') {
-        result = 'You Lose! Paper beats Rock'
-    } else {
-        result = 'Rock vs Rock...DRAW !!'
+    if (userWin) {
+        player_score.textContent = +player_score.textContent + 1;
+    }
+    else if (userLoss) {
+        computer_score.textContent = +computer_score.textContent + 1;
+    }
+    else {
+        console.log('Draw');
     }
 
-    console.log(result);
-    return result;
-}
-
-function game() {
-    for (let i = 1; i <= 5; i++) {
-
-        let msg = `Round ${i}`
-        alert(msg);
-
-        playRound()
+    if (+player_score.textContent === 5 && (+player_score.textContent > +computer_score.textContent)) {
+        final.setAttribute('style', 'color: green;')
+        final.textContent = 'you win !!';
     }
-}
+    else if (+player_score.textContent === 5 && (+player_score.textContent < +computer_score.textContent)) {
+        final.setAttribute('style', 'color: red;')
+        final.textContent = 'you loss !!';
+    }
+    else if (+player_score.textContent === 5 && (+player_score.textContent === +computer_score.textContent)) {
+        final.textContent = 'draw';
+    }
+
+    console.log(user, computer, userWin, userLoss)
+}))
